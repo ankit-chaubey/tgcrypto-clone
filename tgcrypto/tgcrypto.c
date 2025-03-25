@@ -240,4 +240,4 @@ static struct PyModuleDef module = {
 
 PyMODINIT_FUNC PyInit_tgcrypto(void) {
     return PyModule_Create(&module);
-}
+    }

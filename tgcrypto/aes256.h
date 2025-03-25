@@ -17,23 +17,27 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
  */
+#pragma once
 
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 
-#ifndef AES256_H
-#define AES256_H
-
 #define AES_BLOCK_SIZE 16
 #define EXPANDED_KEY_SIZE 60
 
-void aes256_set_encryption_key(const uint8_t key[32], uint32_t expandedKey[60]);
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-void aes256_set_decryption_key(const uint8_t key[32], uint32_t expandedKey[60]);
+void aes256_set_encryption_key(const uint8_t key[32], uint32_t expandedKey[EXPANDED_KEY_SIZE]);
 
-void aes256_encrypt(const uint8_t in[16], uint8_t out[16], const uint32_t expandedKey[60]);
+void aes256_set_decryption_key(const uint8_t key[32], uint32_t expandedKey[EXPANDED_KEY_SIZE]);
 
-void aes256_decrypt(const uint8_t in[16], uint8_t out[16], const uint32_t expandedKey[60]);
+void aes256_encrypt(const uint8_t in[AES_BLOCK_SIZE], uint8_t out[AES_BLOCK_SIZE], const uint32_t expandedKey[EXPANDED_KEY_SIZE]);
 
-#endif  // AES256_H
+void aes256_decrypt(const uint8_t in[AES_BLOCK_SIZE], uint8_t out[AES_BLOCK_SIZE], const uint32_t expandedKey[EXPANDED_KEY_SIZE]);
+
+#ifdef __cplusplus
+}
+#endif
